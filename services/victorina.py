@@ -1,10 +1,5 @@
-import requests
-import json
 from typing import Dict
 
-
-json_string = '''[{"id": 5752,"question": "How do you use 'mapState' to access the state of a specific Vuex module?","description": "Learning how to map module state to component properties using 'mapState'.","answers": {"answer_a": "mapState(['stateProperty'])","answer_b": "mapState('moduleName', ['stateProperty'])","answer_c": "mapState('stateProperty')","answer_d": "mapState('moduleName/stateProperty')","answer_e": null,"answer_f": null},"multiple_correct_answers": "false","correct_answers": {"answer_a_correct": "false","answer_b_correct": "true","answer_c_correct": "false","answer_d_correct": "false","answer_e_correct": "false","answer_f_correct": "false"},"correct_answer": null,"explanation": "You use 'mapState('moduleName', ['stateProperty'])' to access and map a specific module's state properties to component properties.","tip": null,"tags": [{"name": "VueJS"}],"category": "VueJS","difficulty": "Medium"}]'''
-data = json.loads(json_string)
 
 class Victorina:
     # def __init__(self, language='ru', category : str = None, difficulty : str = None):
@@ -45,7 +40,3 @@ class Victorina:
         return [correct_answer for correct_answer in self.data['correct_answers'] if self.data['correct_answers'][correct_answer] == 'true'][0]
 
 # victorina = Victorina(category="VueJS", difficulty="easy")
-victorina = Victorina(data[0])
-print(victorina.get_question())
-print(victorina.get_answers())
-print(victorina.get_correct_answer_key())

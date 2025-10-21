@@ -14,7 +14,7 @@ async def change_difficulty(callback, button, manager: DialogManager):
 
 async def to_settings(callback, button, manager: DialogManager):
     await manager.switch_to(SettingsSG.main)
-
+#todo: Доделать работаспособность настроек
 
 settings_window = Window(
     Const("Тут планируются настройки...."),
