@@ -17,8 +17,3 @@ async def start_cmd(message: Message, dialog_manager: DialogManager, db: Databas
     else:
         await db.create_user(message.from_user.id)
         await dialog_manager.start(MainSG.first_time, mode=StartMode.RESET_STACK)
-
-@router.message(Command("menu"))
-async def menu_cmd(message: Message, dialog_manager: DialogManager):
-    await dialog_manager.start(MainSG.main, mode=StartMode.RESET_STACK)
-

@@ -36,7 +36,7 @@ class Database:
     async def change_difficulty(self, telegram_id: int, difficulty: str):
         async with self.pool.acquire() as connection:
             await connection.execute(
-                "UPDATE users SET difficulty $1 WHERE telegram_id = $2",
+                "UPDATE users SET difficulty = $1 WHERE telegram_id = $2",
                 difficulty, telegram_id
             )
 
