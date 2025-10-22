@@ -7,12 +7,16 @@ from aiogram_dialog import setup_dialogs
 from dialogs import game_dialog, invoice_dialog, profile_dialog, settings_dialog, start_dialog
 from handlers.common import router as common_router
 from handlers.error import router as error_router
+from database.database import Database
 
 
 async def main():
     bot = Bot(token=config.bot_token.get_secret_value())
     storage = MemoryStorage()
+    db = Database()
+    await db.connect()
     dp = Dispatcher(storage=storage)
+    dp["db"] = db
     
     dp.include_router(error_router)
     dp.include_router(common_router)
@@ -29,6 +33,7 @@ async def main():
         await dp.start_polling(bot)
     finally:
         await bot.session.close()
+        await db.close()
 
 if __name__ == "__main__":
     asyncio.run(main())
