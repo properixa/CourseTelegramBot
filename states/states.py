@@ -6,7 +6,8 @@ class MainSG(StatesGroup):
 
 class GameSG(StatesGroup):
     question = State()
-    result = State()
+    correct_result = State()
+    incorrect_result = State()
 
 class SettingsSG(StatesGroup):
     main = State()

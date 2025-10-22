@@ -61,7 +61,7 @@ class Database:
     async def increment_wins(self, telegram_id: int):
         async with self.pool.acquire() as connection:
             result = await connection.execute(
-                "UPDATE users SET wins = wins + 1 WHERE telegram_id = $1",
+                "UPDATE users SET wins = wins + 1, games = games + 1 WHERE telegram_id = $1",
                 telegram_id
             )
             return result
