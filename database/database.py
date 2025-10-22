@@ -28,8 +28,50 @@ class Database:
 
     async def get_user(self, telegram_id: int) -> Optional[asyncpg.Record]:
         async with self.pool.acquire() as connection:
-            await connection.execute(
+            return await connection.fetchrow(
                 "SELECT * FROM users WHERE telegram_id = $1",
+                telegram_id
+            )
+
+    async def change_difficulty(self, telegram_id: int, difficulty: str):
+        async with self.pool.acquire() as connection:
+            await connection.execute(
+                "UPDATE users SET difficulty $1 WHERE telegram_id = $2",
+                difficulty, telegram_id
+            )
+
+    async def increment_games(self, telegram_id: int):
+        async with self.pool.acquire() as connection:
+            await connection.execute(
+                "UPDATE users SET games = games + 1 WHERE telegram_id = $1",
+                telegram_id
+            )
+
+    async def increment_wins(self, telegram_id: int):
+        async with self.pool.acquire() as connection:
+            await connection.execute(
+                "UPDATE users SET wins = wins + 1 WHERE telegram_id = $1",
+                telegram_id
+            )
+
+    async def get_stats(self, telegram_id: int):
+        async with self.pool.acquire() as connection:
+            return await connection.fetchrow(
+                "SELECT games, wins FROM users WHERE telegram_id = $1",
+                telegram_id
+            )
+
+    async def get_difficulty(self, telegram_id: int):
+        async with self.pool.acquire() as connection:
+            return await connection.fetch(
+                "SELECT difficulty FROM users WHERE telegram_id = $1",
+                telegram_id
+            )
+
+    async def get_category(self, telegram_id: int):
+        async with self.pool.acquire() as connection:
+            return await connection.fetch(
+                "SELECT theme FROM users WHERE telegram_id = $1",
                 telegram_id
             )
 
