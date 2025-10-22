@@ -63,18 +63,18 @@ class Database:
 
     async def get_difficulty(self, telegram_id: int):
         async with self.pool.acquire() as connection:
-            return await connection.fetch(
+            return await connection.fetchrow(
                 "SELECT difficulty FROM users WHERE telegram_id = $1",
                 telegram_id
             )
 
     async def get_category(self, telegram_id: int):
         async with self.pool.acquire() as connection:
-            return await connection.fetch(
+            return await connection.fetchrow(
                 "SELECT theme FROM users WHERE telegram_id = $1",
                 telegram_id
             )
 
     async def close(self):
         if (self.pool):
-            self.pool.close()
+            await self.pool.close()

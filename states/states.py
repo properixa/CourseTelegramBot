@@ -1,6 +1,7 @@
 from aiogram.fsm.state import State, StatesGroup
 
 class MainSG(StatesGroup):
+    first_time = State()
     main = State()     # Стартовое меню
 
 class GameSG(StatesGroup):
