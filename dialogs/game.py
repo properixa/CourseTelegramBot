@@ -1,6 +1,6 @@
 from aiogram_dialog import Window, DialogManager
 from aiogram_dialog.widgets.text import Const, Format
-from aiogram_dialog.widgets.kbd import Button, Row, Cancel, Select
+from aiogram_dialog.widgets.kbd import Cancel, Select, Group
 
 import json
 
@@ -50,18 +50,20 @@ async def on_answer_selected(callback, button, manager: DialogManager, item_id: 
         await callback.answer("❌ Неправильный ответ!")
     
     manager.dialog_data.pop('correct_answer', None)
-    await update_next_question(manager)
     await manager.show()
 
 game_window = Window(
     Format("❓ Вопрос:\n{question}"),
     
-    Select(
-        text=Format("{item[1]}"),
-        id="answers_select",
-        item_id_getter=lambda item: item[0],
-        items="answers",
-        on_click=on_answer_selected,
+    Group(
+        Select(
+            text=Format("{item[1]}"),
+            id="answers_select",
+            item_id_getter=lambda item: item[0],
+            items="answers",
+            on_click=on_answer_selected,
+        ),
+        width=1,
     ),
     
     Cancel(Const("⬅️ Выйти")),
