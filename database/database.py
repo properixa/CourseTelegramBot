@@ -86,6 +86,13 @@ class Database:
                 "SELECT theme FROM users WHERE telegram_id = $1",
                 telegram_id
             )
+        
+    async def reset_stats(self, telegram_id: int):
+        async with self.pool.acquire() as connection:
+            return await connection.execute(
+                "UPDATE users SET wins = 0, games = 0 WHERE telegram_id = $1",
+                telegram_id
+            )
 
     async def close(self):
         if (self.pool):
