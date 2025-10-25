@@ -4,7 +4,6 @@ import requests
 
 class Victorina:
     def __init__(self, language='ru', category : str = None, difficulty : str = None):
-        print("victorina init")
         params = {
             'apiKey': 'ZC7HdPW3tEy7YlWIlBTZ7eueKScNNnOwOId0NDZA',
             'language': language,
@@ -23,7 +22,6 @@ class Victorina:
             
         except requests.exceptions.ConnectionError as e:
             print(f"Erorr: {e}")
-        print("victorina inited")
 
     # def __init__(self, data):
     #     self.data = data

@@ -16,6 +16,3 @@ class SettingsSG(StatesGroup):
 
 class ProfileSG(StatesGroup):
     main = State()
-
-class InvoiceSG(StatesGroup):
-    main = State()
