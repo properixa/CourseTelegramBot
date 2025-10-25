@@ -3,7 +3,7 @@ from dialogs.start import start_window, first_time_window
 from dialogs.settings import settings_window, difficulty_choice, theme_choice
 from dialogs.profile import profile_window
 from dialogs.invoice import invoice_window
-from dialogs.game import game_window
+from dialogs.game import game_window, win_window, lose_window
 
 start_dialog = Dialog(
     first_time_window,
@@ -25,5 +25,7 @@ invoice_dialog = Dialog(
 )
 
 game_dialog = Dialog(
-    game_window
+    game_window,
+    win_window,
+    lose_window
 )
