@@ -4,7 +4,7 @@ from aiogram import Bot, Dispatcher
 from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram_dialog import setup_dialogs
 
-from dialogs import game_dialog, invoice_dialog, profile_dialog, settings_dialog, start_dialog
+from dialogs import game_dialog, profile_dialog, settings_dialog, start_dialog
 from handlers.common import router as common_router
 from handlers.error import router as error_router
 from database.database import Database
@@ -24,7 +24,6 @@ async def main():
     dp.include_router(start_dialog)
     dp.include_router(settings_dialog)
     dp.include_router(game_dialog)
-    dp.include_router(invoice_dialog)
     dp.include_router(profile_dialog)
     
     setup_dialogs(dp)
